@@ -6,6 +6,9 @@ type Round = {
     p2: BotSelection,
 }
 
+
+
+
 class Bot {
     makeMove(gamestate: Gamestate): BotSelection {
 
@@ -15,15 +18,23 @@ class Bot {
         let wb: boolean = this.usesWb(gamestate);
 
         let myDyn: number = this.getDynUsed(gamestate, "p1");
-        let oppDyn: number = this.getDynUsed(gamestate, "p2");
 
         let myDynLeft = 100 - myDyn;
-        let oppDynLeft = 100 - oppDyn;
 
         let nextMove: number;
         let draws = this.nrDraw(gamestate);
 
         console.log(roundCount, myDynLeft);
+
+
+        /**
+         * Whether the opponent uses waterbombs or not dictate our strategy. There is no specific formula for choosing the probability to throw a dynamite,
+         * we just try to approximate what would be the best percentiles.
+         *
+         * The code can clearly be compressed and written in a much better way, but I didn't have time to focus on that
+         */
+
+
 
         if (!wb) {
 
@@ -40,31 +51,31 @@ class Bot {
                 }
             } else if (draws === 1) {
                 nextMove = Math.floor(Math.random() * 100) + 1;
-                if (nextMove <= 8) {
+                if (nextMove <= 2) {
                     return 'D';
                 }
-                if (nextMove <= 39) {
+                if (nextMove <= 35) {
                     return 'P';
                 }
-                if (nextMove <= 70) {
+                if (nextMove <= 68) {
                     return 'R';
                 }
                 return 'S';
             } else if (draws === 2) {
                 nextMove = Math.floor(Math.random() * 100) + 1;
-                if (nextMove <= 33) {
+                if (nextMove <= 60) {
                     return 'D';
                 }
-                if (nextMove <= 55) {
+                if (nextMove <= 67) {
                     return 'P';
                 }
-                if (nextMove <= 77) {
+                if (nextMove <= 84) {
                     return 'R';
                 }
                 return 'S';
             } else if (draws === 3) {
                 nextMove = Math.floor(Math.random() * 100) + 1;
-                if (nextMove <= 50) {
+                if (nextMove <= 70) {
                     return 'D';
                 }
                 if (nextMove <= 67) {
@@ -76,18 +87,6 @@ class Bot {
                 return 'S';
             } else if (draws === 4) {
                 nextMove = Math.floor(Math.random() * 100) + 1;
-                if (nextMove <= 70) {
-                    return 'D';
-                }
-                if (nextMove <= 80) {
-                    return 'P';
-                }
-                if (nextMove <= 90) {
-                    return 'R';
-                }
-                return 'S';
-            } else  {
-                nextMove = Math.floor(Math.random() * 100) + 1;
                 if (nextMove <= 80) {
                     return 'D';
                 }
@@ -95,6 +94,18 @@ class Bot {
                     return 'P';
                 }
                 if (nextMove <= 94) {
+                    return 'R';
+                }
+                return 'S';
+            } else  {
+                nextMove = Math.floor(Math.random() * 100) + 1;
+                if (nextMove <= 99) {
+                    return 'D';
+                }
+                if (nextMove <= 100) {
+                    return 'P';
+                }
+                if (nextMove <= 100) {
                     return 'R';
                 }
                 return 'S';
@@ -187,6 +198,7 @@ class Bot {
         return dynUsed;
     }
 
+    // Counts the number of consecutive draws starting from the last round played.
     public nrDraw(gamestate: Gamestate) {
         let count = 0;
         let i = gamestate["rounds"].length-1;
@@ -203,10 +215,12 @@ class Bot {
         return count;
     }
 
+    // Decides if a round is a draw
     public isDraw(round: Round) {
         return round["p1"] === round["p2"];
     }
 
+    // Decides if opponent uses waterbomb. This helps build our strategy
     public usesWb(gamestate: Gamestate) {
         let rounds = gamestate["rounds"];
         for (let round of rounds) {
