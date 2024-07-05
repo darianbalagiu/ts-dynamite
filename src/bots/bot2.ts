@@ -27,7 +27,7 @@ class Bot {
 
         if (!wb) {
 
-            if (draws === 0 || myDynLeft === 1) {
+            if (draws === 0 || myDynLeft === 2) {
                 nextMove = Math.floor(Math.random() * 3) + 1;
                 if (nextMove === 1) {
                     return 'R';
@@ -40,13 +40,13 @@ class Bot {
                 }
             } else if (draws === 1) {
                 nextMove = Math.floor(Math.random() * 100) + 1;
-                if (nextMove <= 15) {
+                if (nextMove <= 8) {
                     return 'D';
                 }
-                if (nextMove <= 43) {
+                if (nextMove <= 39) {
                     return 'P';
                 }
-                if (nextMove <= 71) {
+                if (nextMove <= 70) {
                     return 'R';
                 }
                 return 'S';
@@ -64,31 +64,43 @@ class Bot {
                 return 'S';
             } else if (draws === 3) {
                 nextMove = Math.floor(Math.random() * 100) + 1;
-                if (nextMove <= 66) {
+                if (nextMove <= 50) {
                     return 'D';
                 }
-                if (nextMove <= 77) {
+                if (nextMove <= 67) {
                     return 'P';
                 }
-                if (nextMove <= 88) {
+                if (nextMove <= 84) {
                     return 'R';
                 }
                 return 'S';
-            } else {
+            } else if (draws === 4) {
                 nextMove = Math.floor(Math.random() * 100) + 1;
-                if (nextMove <= 90) {
+                if (nextMove <= 70) {
                     return 'D';
                 }
-                if (nextMove <= 93) {
+                if (nextMove <= 80) {
                     return 'P';
                 }
-                if (nextMove <= 96) {
+                if (nextMove <= 90) {
+                    return 'R';
+                }
+                return 'S';
+            } else  {
+                nextMove = Math.floor(Math.random() * 100) + 1;
+                if (nextMove <= 80) {
+                    return 'D';
+                }
+                if (nextMove <= 87) {
+                    return 'P';
+                }
+                if (nextMove <= 94) {
                     return 'R';
                 }
                 return 'S';
             }
         } else {
-            if (draws === 0 || myDynLeft === 1) {
+            if (draws === 0 || myDynLeft === 2) {
                 nextMove = Math.floor(Math.random() * 3) + 1;
                 if (nextMove === 1) {
                     return 'R';
@@ -101,13 +113,13 @@ class Bot {
                 }
             } else if (draws === 1) {
                 nextMove = Math.floor(Math.random() * 100) + 1;
-                if (nextMove <= 15) {
+                if (nextMove <= 8) {
                     return 'D';
                 }
-                if (nextMove <= 43) {
+                if (nextMove <= 39) {
                     return 'P';
                 }
-                if (nextMove <= 71) {
+                if (nextMove <= 70) {
                     return 'R';
                 }
                 return 'S';
@@ -125,32 +137,43 @@ class Bot {
                 return 'S';
             } else if (draws === 3) {
                 nextMove = Math.floor(Math.random() * 100) + 1;
-                if (nextMove <= 66) {
+                if (nextMove <= 50) {
                     return 'D';
                 }
-                if (nextMove <= 77) {
+                if (nextMove <= 67) {
                     return 'P';
                 }
-                if (nextMove <= 88) {
+                if (nextMove <= 84) {
                     return 'R';
                 }
                 return 'S';
-            } else {
+            } else if (draws === 4) {
                 nextMove = Math.floor(Math.random() * 100) + 1;
-                if (nextMove <= 90) {
+                if (nextMove <= 70) {
                     return 'D';
                 }
-                if (nextMove <= 93) {
+                if (nextMove <= 80) {
                     return 'P';
                 }
-                if (nextMove <= 96) {
+                if (nextMove <= 90) {
+                    return 'R';
+                }
+                return 'S';
+            } else  {
+                nextMove = Math.floor(Math.random() * 100) + 1;
+                if (nextMove <= 80) {
+                    return 'D';
+                }
+                if (nextMove <= 87) {
+                    return 'P';
+                }
+                if (nextMove <= 94) {
                     return 'R';
                 }
                 return 'S';
             }
         }
     }
-
 
     public getDynUsed(gamestate: Gamestate, player: string) {
 
